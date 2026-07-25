@@ -13,7 +13,7 @@ import EvidencePage from "@/pages/Evidence";
 import VoxCryptPage from "@/pages/VoxCrypt";
 import IncidentsPage from "@/pages/Incidents";
 import MetricsPage from "@/pages/Metrics";
-import HoneypotPage from "@/pages/Honeypot";
+
 
 export default function App() {
   return (
@@ -33,7 +33,7 @@ export default function App() {
           <Route path="/voxcrypt" element={<VoxCryptPage />} />
           <Route path="/incidents" element={<IncidentsPage />} />
           <Route path="/metrics" element={<MetricsPage />} />
-          <Route path="/honeypot" element={<HoneypotPage />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
