@@ -113,12 +113,24 @@ export interface ValidationResponse {
   rule?: unknown;
 }
 
+export interface ConfusionMatrix {
+  true_positives: number;
+  false_positives: number;
+  true_negatives: number;
+  false_negatives: number;
+}
+
 export interface RunRuleResponse {
   matches: number;
   matched_events: SecurityEvent[];
   precision: number;
   recall: number;
   false_positive_rate: number;
+  f1_score: number;
+  accuracy: number;
+  specificity: number;
+  confusion_matrix: ConfusionMatrix;
+  execution_time_ms: number;
 }
 
 export interface MitreTechnique {

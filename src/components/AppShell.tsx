@@ -13,6 +13,7 @@ import {
   FileSearch,
   Cpu,
   Video,
+  BarChart3,
 } from "lucide-react";
 
 const NAV = [
@@ -28,6 +29,7 @@ const NAV = [
   { to: "/evidence", label: "Evidence Vault", icon: Archive },
   { to: "/voxcrypt", label: "VoxCrypt Secure Comms", icon: Radio },
   { to: "/incidents", label: "Incident Investigation", icon: FileSearch },
+  { to: "/metrics", label: "Detection Metrics", icon: BarChart3 },
 ];
 
 export default function AppShell() {

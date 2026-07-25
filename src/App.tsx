@@ -12,6 +12,7 @@ import AiSocMediaPage from "@/pages/AiSocMedia";
 import EvidencePage from "@/pages/Evidence";
 import VoxCryptPage from "@/pages/VoxCrypt";
 import IncidentsPage from "@/pages/Incidents";
+import MetricsPage from "@/pages/Metrics";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/evidence" element={<EvidencePage />} />
           <Route path="/voxcrypt" element={<VoxCryptPage />} />
           <Route path="/incidents" element={<IncidentsPage />} />
+          <Route path="/metrics" element={<MetricsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

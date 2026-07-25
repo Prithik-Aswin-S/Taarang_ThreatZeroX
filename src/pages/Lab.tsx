@@ -262,6 +262,30 @@ export default function LabPage() {
                   <MetricCard label="Precision" value={`${(runResult.precision * 100).toFixed(1)}%`} tone={runResult.precision >= 0.8 ? "success" : "warning"} />
                   <MetricCard label="Recall" value={`${(runResult.recall * 100).toFixed(1)}%`} tone={runResult.recall >= 0.8 ? "success" : "warning"} />
                   <MetricCard label="False Positive Rate" value={`${(runResult.false_positive_rate * 100).toFixed(1)}%`} tone={runResult.false_positive_rate < 0.1 ? "success" : "threat"} />
+                  <MetricCard label="F1 Score" value={`${(runResult.f1_score * 100).toFixed(1)}%`} tone="cyber" />
+                  <MetricCard label="Accuracy" value={`${(runResult.accuracy * 100).toFixed(1)}%`} tone="success" />
+                </div>
+                <div className="glass rounded-lg p-3">
+                  <div className="text-[10px] uppercase text-slate-500 mb-2">Confusion Matrix</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-2 text-center">
+                      <div className="text-lg font-bold text-emerald-300">{runResult.confusion_matrix.true_positives}</div>
+                      <div className="text-[10px] text-slate-500">True Positives</div>
+                    </div>
+                    <div className="rounded border border-amber-500/30 bg-amber-500/10 p-2 text-center">
+                      <div className="text-lg font-bold text-amber-300">{runResult.confusion_matrix.false_positives}</div>
+                      <div className="text-[10px] text-slate-500">False Positives</div>
+                    </div>
+                    <div className="rounded border border-red-500/30 bg-red-500/10 p-2 text-center">
+                      <div className="text-lg font-bold text-red-300">{runResult.confusion_matrix.false_negatives}</div>
+                      <div className="text-[10px] text-slate-500">False Negatives</div>
+                    </div>
+                    <div className="rounded border border-cyan-500/30 bg-cyan-500/10 p-2 text-center">
+                      <div className="text-lg font-bold text-cyan-300">{runResult.confusion_matrix.true_negatives}</div>
+                      <div className="text-[10px] text-slate-500">True Negatives</div>
+                    </div>
+                  </div>
+                  <div className="text-[10px] text-slate-500 mt-2 text-center">Executed in {runResult.execution_time_ms}ms</div>
                 </div>
                 {mitreInfo && (
                   <div className="glass rounded-lg p-3">
