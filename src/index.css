@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --color-soc-bg: #060a14;
+  --color-soc-panel: #0c1322;
+  --color-soc-panel-2: #111a2e;
+  --color-soc-border: #1e2a44;
+  --color-cyber: #22d3ee;
+  --color-cyber-dim: #0891b2;
+  --color-threat: #ef4444;
+  --color-threat-dim: #b91c1c;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #060a14;
+  color: #e2e8f0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(135deg, rgba(17, 26, 46, 0.85), rgba(12, 19, 34, 0.75));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(34, 211, 238, 0.12);
+  }
+  .glass-hover {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .glass-hover:hover {
+    border-color: rgba(34, 211, 238, 0.35);
+    box-shadow: 0 0 24px -6px rgba(34, 211, 238, 0.25);
+  }
+  .cyber-glow {
+    box-shadow: 0 0 18px -4px rgba(34, 211, 238, 0.4);
+  }
+  .threat-glow {
+    box-shadow: 0 0 18px -4px rgba(239, 68, 68, 0.45);
+  }
+  .btn-cyber {
+    background: linear-gradient(135deg, #0891b2, #22d3ee);
+    color: #060a14;
+    font-weight: 600;
+    transition: filter 0.2s ease, transform 0.2s ease;
+  }
+  .btn-cyber:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+  }
+  .btn-cyber:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .scanline {
+    background-image: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.04) 50%, transparent 100%);
+    background-size: 100% 4px;
+  }
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+.pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fade-in 0.35s ease-out both;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0c1322; }
+::-webkit-scrollbar-thumb { background: #1e2a44; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #2a3a5c; }
