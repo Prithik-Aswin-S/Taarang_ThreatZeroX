@@ -14,6 +14,7 @@ import {
   Cpu,
   Video,
   BarChart3,
+  Bug,
 } from "lucide-react";
 
 const NAV = [
@@ -30,6 +31,7 @@ const NAV = [
   { to: "/voxcrypt", label: "VoxCrypt Secure Comms", icon: Radio },
   { to: "/incidents", label: "Incident Investigation", icon: FileSearch },
   { to: "/metrics", label: "Detection Metrics", icon: BarChart3 },
+  { to: "/honeypot", label: "Honeypot", icon: Bug },
 ];
 
 export default function AppShell() {

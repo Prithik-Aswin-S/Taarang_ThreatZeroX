@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
-import { Play, ShieldCheck, AlertTriangle, CheckCircle2, XCircle, Save, Download, Crosshair, Gauge } from "lucide-react";
-import { validateRule, runRule } from "@/lib/sigma";
+import { Play, ShieldCheck, AlertTriangle, CheckCircle2, XCircle, Save, Download, Crosshair, Gauge, Wand2 } from "lucide-react";
+import { validateRule, runRule, autoFixSigma } from "@/lib/sigma";
 import { supabase } from "@/lib/supabase";
 import { eventsForChallenge } from "@/data/datasets";
 import { Panel, Badge, MetricCard } from "@/components/ui";
@@ -48,6 +48,20 @@ export default function LabPage() {
   const [running, setRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [autoFixChanges, setAutoFixChanges] = useState<string[] | null>(null);
+
+  const handleAutoFix = () => {
+    const result = autoFixSigma(yaml);
+    if (result.fixed) {
+      setYaml(result.fixedYaml);
+      setAutoFixChanges(result.changes);
+      setValidation(null);
+      setRunResult(null);
+    } else {
+      setAutoFixChanges(["No common errors detected — rule structure looks clean."]);
+    }
+    setTimeout(() => setAutoFixChanges(null), 5000);
+  };
 
   useEffect(() => {
     setEvents(eventsForChallenge(datasetKey));
@@ -128,6 +142,9 @@ export default function LabPage() {
           <p className="text-sm text-slate-400 mt-1">Author, validate, and execute Sigma rules against realistic security datasets</p>
         </div>
         <div className="flex gap-2">
+          <button onClick={handleAutoFix} className="rounded-lg px-4 py-2 text-sm flex items-center gap-2 border border-violet-500/30 text-violet-300 hover:bg-violet-500/10 transition-colors">
+            <Wand2 className="h-4 w-4" /> AI Auto-Fix
+          </button>
           <button onClick={handleValidate} disabled={validating} className="btn-cyber rounded-lg px-4 py-2 text-sm flex items-center gap-2">
             <ShieldCheck className="h-4 w-4" /> {validating ? "Validating..." : "Validate"}
           </button>
@@ -146,6 +163,18 @@ export default function LabPage() {
       {error && (
         <div className="glass rounded-lg p-3 border-red-500/40 flex items-center gap-2 text-sm text-red-300">
           <XCircle className="h-4 w-4" /> {error}
+        </div>
+      )}
+
+      {autoFixChanges && (
+        <div className="glass rounded-lg p-3 border-violet-500/40 flex items-start gap-2 text-sm text-violet-200">
+          <Wand2 className="h-4 w-4 mt-0.5 shrink-0" />
+          <div>
+            <span className="font-semibold text-violet-300">AI Auto-Fix applied:</span>
+            <ul className="mt-1 space-y-0.5 text-xs">
+              {autoFixChanges.map((c, i) => (<li key={i}>• {c}</li>))}
+            </ul>
+          </div>
         </div>
       )}
 
